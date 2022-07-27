@@ -1,0 +1,29 @@
+<!-- 
+    This raw_index.html file is just the initial example to understand the mani components in the application. 
+    However, as usual with coding, having everything (html, js, and even css styles) in a single script is not a 
+    recommended practice as it makes the code difficult to read and maintain 
+-->
+<h1>ATM Example</h1>
+<label className="label huge">
+    Deposit:
+    <input type="number" onchange="handleChange(value)"></input>
+    <input type="submit" onclick="handleSubmit()"></input>
+    <h2 id="total">Account Balance $0.00</h2>
+</label>
+<script>
+    let transactionState = 0;
+    let totalState = 0;
+    let status = "Account Balance $zero";
+    const handleChange = value => {
+        console.log(`handleChange ${value}`);
+        transactionState = Number(value);
+    };
+    const handleSubmit = () => {
+        totalState += transactionState;
+        // Added some currency format to the output:
+        status = `Account Balance ${Intl.NumberFormat('en-US', { style:'currency', 
+                                     currency:'USD'}).format(totalState)}`;
+        // write into the DOM
+        document.getElementById("total").innerHTML = status;
+    };
+</script>
